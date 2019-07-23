@@ -1,0 +1,30 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+   <TextView
+       android:background="@color/colorAccent"
+       android:text="时间选择器"
+       android:gravity="center"
+       android:id="@+id/Time"
+       android:layout_width="match_parent"
+       android:layout_height="50dp" />
+   <TextView
+       android:background="@color/colorPrimaryDark"
+       android:text="列表"
+       android:gravity="center"
+       android:id="@+id/List"
+       android:layout_width="match_parent"
+       android:layout_height="50dp" />
+
+   <TextView
+       android:gravity="center"
+       android:text="下拉列表"
+       android:background="@color/colorAccent"
+       android:layout_width="match_parent"
+       android:layout_height="50dp"
+       android:id="@+id/nice_spinner" />
+</LinearLayout>
+
