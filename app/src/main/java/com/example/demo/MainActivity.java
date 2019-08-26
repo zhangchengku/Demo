@@ -1,25 +1,23 @@
 package com.example.demo;
 
 
-import android.content.Context;
-import android.graphics.Color;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
-import com.bigkoo.pickerview.TimePickerView;
 import com.bigkoo.pickerview.listener.CustomListener;
+import com.example.demo.demo.DemoActivity;
+import com.jaeger.library.StatusBarUtil;
 import com.lxj.xpopup.XPopup;
-import com.lxj.xpopup.interfaces.OnSelectListener;
 import com.lxj.xpopup.interfaces.XPopupCallback;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -37,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     TextView Lists;
     @BindView(R.id.nice_spinner)
     TextView niceSpinner;
+    @BindView(R.id.ed)
+    EditText ed;
 
 
     private List<String> mOptionsItems = new ArrayList<>();
@@ -48,9 +48,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        StatusBarUtil.setTransparent(MainActivity.this);
+        StatusBarUtil.setTranslucent(MainActivity.this, 30);
+//        StatusBarUtil.setColor(MainActivity.this, Color.TRANSPARENT);
         ButterKnife.bind(this);
 
-        mOptionsItems.add("item0");
         mOptionsItems.add("item1");
         mOptionsItems.add("item2");
 
@@ -66,17 +68,18 @@ public class MainActivity extends AppCompatActivity {
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.Time:
-                //时间选择器
-                TimePickerView pvTime = new TimePickerView.Builder(MainActivity.this, new TimePickerView.OnTimeSelectListener() {
-                    @Override
-                    public void onTimeSelect(Date date, View v) {//选中事件回调
-                        Time.setText(getTime(date));
-                    }
-                }).setType(new boolean[]{true, true, true, false, false, false})
-                        .build();
-                pvTime.setDate(Calendar.getInstance());//注：根据需求来决定是否使用该方法（一般是精确到秒的情况），此项可以在弹出选择器的时候重新设置当前时间，避免在初始化之后由于时间已经设定，导致选中时间与当前时间不匹配的问题。
-
-                pvTime.show();
+                startActivity(new Intent(MainActivity.this, DemoActivity.class));
+//                //时间选择器
+//                TimePickerView pvTime = new TimePickerView.Builder(MainActivity.this, new TimePickerView.OnTimeSelectListener() {
+//                    @Override
+//                    public void onTimeSelect(Date date, View v) {//选中事件回调
+//                        Time.setText(getTime(date));
+//                    }
+//                }).setType(new boolean[]{true, true, true, false, false, false})
+//                        .build();
+//                pvTime.setDate(Calendar.getInstance());//注：根据需求来决定是否使用该方法（一般是精确到秒的情况），此项可以在弹出选择器的时候重新设置当前时间，避免在初始化之后由于时间已经设定，导致选中时间与当前时间不匹配的问题。
+//
+//                pvTime.show();
                 break;
             case R.id.List:
                 pvCustomOptions = new OptionsPickerView.Builder(MainActivity.this, new OptionsPickerView.OnOptionsSelectListener() {
@@ -116,8 +119,10 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
     }
-    private void showPartShadow(final View v){
-        if(popupView!=null && popupView.isShow())return;
+
+    private void showPartShadow(final View v) {
+
+        if (popupView != null && popupView.isShow()) return;
         popupView = (CustomPartShadowPopupView) new XPopup.Builder(MainActivity.this)
                 .atView(v)
 //                .dismissOnTouchOutside(false)
@@ -125,6 +130,7 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onShow() {
                     }
+
                     @Override
                     public void onDismiss() {
                         popupView = null;
@@ -134,10 +140,11 @@ public class MainActivity extends AppCompatActivity {
                 .asCustom(new CustomPartShadowPopupView(MainActivity.this, new DiseaseNewSelectObjectListener() {
                     @Override
                     public void selectPosition(int position) {
-                        Log.e( "张成昆: ", position+"");
+                        Log.e("张成昆: ", position + "");
                     }
                 }));
         popupView.show();
     }
+
 
 }

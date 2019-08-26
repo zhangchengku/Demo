@@ -3,7 +3,12 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+<EditText
+    android:background="@null"
+    android:textCursorDrawable="@drawable/edit_bg"
+    android:id="@+id/ed"
+    android:layout_width="match_parent"
+    android:layout_height="50dp" />
    <TextView
        android:background="@color/colorAccent"
        android:text="时间选择器"
