@@ -1,4 +1,7 @@
 package com.example.demo;
 
-public class Task {
+import android.support.v7.app.AppCompatActivity;
+
+public class Task extends AppCompatActivity{
+
 }
